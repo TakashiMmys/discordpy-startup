@@ -21,6 +21,9 @@ async def ping(ctx):
 
 #ここまでテンプレ
 
+if not discord.opus.is_loaded():
+    discord.opus.load_opus("heroku-buildpack-libopus")
+
 @bot.command(aliases=["connect","summon"]) #connectやsummonでも呼び出せる
 async def join(ctx):
     """Botをボイスチャンネルに入室させます。"""
@@ -61,12 +64,12 @@ async def play(ctx):
     if not ctx.message.attachments:
         await ctx.send("ファイルが添付されていません。")
         return
-    
-    await ctx.message.attachments[0].save("BGM.mp3")
+
+    await ctx.message.attachments[0].save("D:\NijisanjiBGM\BGM.mp3")
 
     ffmpeg_audio_source = discord.FFmpegPCMAudio("D:\NijisanjiBGM\BGM.mp3")
     voice_client.play(ffmpeg_audio_source)
-    
+
     await ctx.send("再生しました。")
 
 bot.run(token)
