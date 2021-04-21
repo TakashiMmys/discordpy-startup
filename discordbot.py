@@ -19,13 +19,7 @@ async def on_command_error(ctx, error):
 async def ping(ctx):
     await ctx.send('pong')
 
-
-bot.run(token)
-
 #ここまでテンプレ
-
-if not discord.opus.is_loaded():
-    discord.opus.load_opus("heroku-buildpack-libopus")
 
 @bot.command(aliases=["connect","summon"]) #connectやsummonでも呼び出せる
 async def join(ctx):
