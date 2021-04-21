@@ -5,7 +5,7 @@ import random
 import time
 
 # ここにチャンネルID
-gbm_channel_id = 0
+gbm_channel_id = 834402896543088651
 
 vcc = discord.VoiceChannel
 vc = discord.VoiceClient
