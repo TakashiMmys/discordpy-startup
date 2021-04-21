@@ -58,15 +58,21 @@ async def play(ctx):
         await ctx.send("Botはこのサーバーのボイスチャンネルに参加していません。")
         return
 
-    if not ctx.message.attachments:
-        await ctx.send("ファイルが添付されていません。")
+    if ctx.message.attachments:
+        await ctx.send("添付された曲を再生します")
+        await ctx.message.attachments[0].save("tmp.mp3")
+        music = "tmp.mp3"
+        ffmpeg_audio_source = discord.FFmpegPCMAudio(music)
+        voice_client.play(ffmpeg_audio_source)
         return
+    else:
+        await ctx.send("ファイルを添付してください")
 
-    await ctx.message.attachments[0].save("D:\\NijisanjiBGM\\BGM.mp3")
+        await ctx.message.attachments[0].save("D:\\NijisanjiBGM\\BGM.mp3")
 
-    ffmpeg_audio_source = discord.FFmpegPCMAudio("D:\\NijisanjiBGM\\BGM.mp3")
-    voice_client.play(ffmpeg_audio_source)
+        ffmpeg_audio_source = discord.FFmpegPCMAudio("D:\\NijisanjiBGM\\BGM.mp3")
+        voice_client.play(ffmpeg_audio_source)
 
-    await ctx.send("再生しました。")
+        await ctx.send("再生しました。")
 
 bot.run(token)
